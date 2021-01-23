@@ -57,7 +57,9 @@
         window.APPLICATION_USER_DATE_FORMAT = "YYYY-MM-DD";
         window.APPLICATION_USER_TIME_FORMAT = "HH:mm";
         window.APPLICATION_USER_LANGUAGE = "en";
+        @if(Auth::check())
         window.UID = '{{ Auth::user()->id }}';
+        @endif
         window.APPLICATION_USER_TIME_FORMAT_24 = true;
     </script>
 
@@ -96,7 +98,7 @@
     @include('partial.left-sidebar-noauth')
   @endif
 
-    
+
 
     @include('partial.right-sidebar')
 </section>
@@ -109,9 +111,9 @@
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <div class="card">
 
-            
-                @yield('content') 
-            
+
+                @yield('content')
+
 
         </div>
     </div>
@@ -123,7 +125,7 @@
 
 
 @include('partial.bottom_js')
-<script src="http://localhost/lar8/public/vendor/datatables/buttons.server-side.js"></script>
+<script src="{{asset('vendor/datatables/buttons.server-side.js')}}"></script>
 @stack('scripts')
 
 <div class="modal fade" id="genericModal" tabindex="-1" role="dialog" aria-hidden="true" style="z-index: 10080!important;">
