@@ -79,3 +79,80 @@ window.APPLICATION_USER_TIME_FORMAT_24 true
           <button type="button" class="button save" data-action="save-jpg">Save as JPG</button>
           <button type="button" class="button save" data-action="save-svg">Save as SVG</button>
         </div>
+
+
+
+          /*$contact = DB::table('contacts')
+                   ->select('client_id',DB::raw('MIN(id) as id'),'email','phone_no')
+                   ->groupBy('client_id');
+
+          $newQuery = DB::table('clients')
+            ->join('users', 'clients.assigned_to', '=', 'users.id')
+            ->joinSub($contact, 'clients_contact', function ($join) {
+                $join->on('clients.id', '=', 'clients_contact.client_id');
+            })->select([
+                'clients.id as id',
+                'clients.account_number as account_number',
+                'clients.client_name as client_name',
+                'users.name as assigned_to',
+                'clients_contact.email as email',
+                'clients_contact.phone_no as phone_no',
+            ])
+           ->toSql();*
+/*ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION*/
+
+    /*$contact = DB::table('contacts')
+                   ->select('client_id',DB::raw('MIN(id) as id','email','phone_no'))
+                   ->groupBy('client_id');
+
+        $newQuery = DB::table('clients')
+        ->join('users', 'clients.assigned_to', '=', 'users.id')
+        ->joinSub($contact, 'clients_contact', function ($join) {
+            $join->on('clients.id', '=', 'clients_contact.client_id');
+        })
+        ->select([
+                'clients.id as id',
+                'clients.account_number as account_number',
+                'clients.client_name as client_name',
+                'users.name as assigned_to',
+                'clients_contact.email as email',
+                'clients_contact.phone_no as phone_no',
+            ])
+        ->get();*/
+
+
+        /*$newQuery = DB::table('clients')->selectRaw(
+                'clients.id as id, 
+                clients.account_number as account_number,
+                clients.client_name as client_name,
+                users.name as assigned_to,
+                contacts.email as email,
+                contacts.phone_no as phone_no')
+            ->rightjoin('users', 'clients.assigned_to', '=', 'users.id')
+            ->rightjoin('contacts', 'contacts.client_id', '=', 'clients.id')
+            ->toSQL();*/
+
+            //return $newQuery;
+
+
+
+
+            $storecontact = DB::table('storecontacts')
+                   ->select('store_id',DB::raw('MIN(id) as id'),'name','title')
+                   ->groupBy('store_id');
+
+        //$storecontacts = DB::table('storecontacts')->where('name', 'John')->first();
+        $query = $model->newQuery();
+        $newQuery = $query->joinSub($storecontact, 'stores_contact', function ($join) {
+                    $join->on('stores.id', '=', 'stores_contact.store_id')
+                    })->where('stores.client_id',$this->client_id)
+                    ->select([
+                'stores.id as id',
+                'stores.store_name as store_name',
+                'stores.address1 as address1',
+                'stores.city as city',
+                'stores.postcode as postcode',
+                'stores_contact.phone_no as phone_no',
+                'stores_contact.email as email',
+                'stores.store_id as store_id'
+            ]);

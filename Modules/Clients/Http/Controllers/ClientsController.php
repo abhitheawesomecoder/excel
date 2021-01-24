@@ -31,7 +31,7 @@ class ClientsController extends Controller
      * @return Response
      */
     public function index(ClientDataTable $dataTable)
-    {   
+    {  
         return $dataTable->render('signup::index');
     }
     public function getaddress(Request $request)
