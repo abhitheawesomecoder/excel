@@ -116,6 +116,8 @@ class JobsController extends Controller
         $sign->staff_id = $userId;
         $sign->save();
 
+        $job->status = 5;
+        $job->save();
         
         $client = Client::find($job->client_id);
         $store = Store::find($job->store_id);
