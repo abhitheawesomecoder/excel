@@ -68,9 +68,9 @@ class MenuComposer
                         'url' => route('jobs.index')
                     ]));
         $mainMenu->add(SpatieView::create('menu-element', [
-                        'icon' => 'calendar_today',
-                        'name' => 'Calendar',
-                        'url' => route('jobs.calendar')
+                        'icon' => 'settings',
+                        'name' => 'Settings',
+                        'url' => route('settings.index')
                     ]));
 
 

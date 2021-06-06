@@ -2,9 +2,11 @@
 
 namespace Modules\Contractors\Http\Controllers;
 
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Hash;
 use Kris\LaravelFormBuilder\FormBuilder;
 use Modules\Jobs\DataTables\JobOnlyDataTable;
 use Modules\Contractors\Entities\Contractor;
@@ -60,7 +62,46 @@ class ContractorsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $form = $this->form(AddContractorForm::class);
+
+        if (!$form->isValid()) {
+            return redirect()->back()->withErrors($form->getErrors())->withInput();
+        }
+
+        $newUser = new User;
+        $newUser->name = $request->contact_name;
+        $newUser->first_name = $request->contact_name;
+        $newUser->password = Hash::make($request->password);
+        $newUser->email = $request->login_email;
+        $newUser->type = 'contractor';
+        $newUser->save();
+
+        $newContractor = new Contractor;
+        $newContractor->next_job_number = $contractor->contractor_identifier.'1001';
+        $newContractor->company_name = $request->company_name;
+        $newContractor->contact_name = $request->contact_name;
+        $newContractor->mobile_tel_no = $request->mobile_tel_no;
+        $newContractor->main_office_tel_no = $request->main_office_tel_no;
+        $newContractor->position = $request->position;
+        $newContractor->company_address1 = $request->company_address1;
+        $newContractor->company_address2 = $request->company_address2;
+        $newContractor->company_city = $request->company_city;
+        $newContractor->company_postcode = $request->company_postcode;
+        $newContractor->company_email = $request->company_email;
+        $newContractor->company_fax_no = $request->company_fax_no;
+        $newContractor->company_vat_no = $request->company_vat_no;
+        $newContractor->billing_address1 = $request->billing_address1;
+        $newContractor->billing_address2 = $request->billing_address2;
+        $newContractor->billing_city = $request->billing_city;
+        $newContractor->billing_postcode = $request->billing_postcode;
+        $newContractor->bank_ac_name = $request->bank_ac_name;
+        $newContractor->ac_number = $request->ac_number;
+        $newContractor->sort_code = $request->sort_code;
+        $newContractor->company_reg_no = $request->company_reg_no;
+        $newContractor->user_id = $newUser->id;
+        $newContractor->save();
+
+        return redirect()->route('contractors.index');
     }
 
     /**
@@ -189,6 +230,10 @@ class ContractorsController extends Controller
                 'type' => 'text',
             ],
 
+            'login_email' => [
+                'type' => 'email',
+            ],
+
             'password' => [
                 'type' => 'password'
             ],
@@ -221,7 +266,7 @@ class ContractorsController extends Controller
             ],
 
             'company_email' => [
-                'type' => 'text',
+                'type' => 'email',
             ],
 
             'company_fax_no' => [

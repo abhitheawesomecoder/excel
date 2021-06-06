@@ -11,6 +11,11 @@
 |
 */
 
-Route::prefix('settings')->group(function() {
+/*Route::prefix('settings')->group(function() {
     Route::get('/', 'SettingsController@index');
-});
+});*/
+Route::resource('settings', 'SettingsController');
+
+Route::resource('company_settings','CompanySettingsController');
+    
+Route::resource('password_settings','PasswordSettingsController');

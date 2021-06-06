@@ -12,6 +12,7 @@
                <img style="height: 10%;" src="{{$sign->contractorcode}}" alt="Contractor Sign">
              </td>
           </tr>
+          <tr><td style="text-align: right;">Name : </td><td>{{$sign->name}}</td></tr>
           <tr><td style="text-align: right;">Date : </td><td>{{$sign->contractor_date}}</td></tr>
         </table>  
        </td>
@@ -27,6 +28,7 @@
                <img style="height: 10%;" src="{{$sign->staffcode}}" alt="Staff Sign">
              </td>
           </tr>
+          <tr><td style="text-align: right;">Name : </td><td>{{$sign->name}}</td></tr>
           <tr><td style="text-align: right;">Date : </td><td>{{$sign->staff_date}}</td></tr>
         </table>
        </td>

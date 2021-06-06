@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Modules\Core\ViewComposers\MenuComposer;
+use Modules\Settings\ViewComposers\SettingsMenuComposer;
 use Modules\Contractorprofile\ViewComposers\ContractorMenuComposer;
 
 class AppServiceProvider extends ServiceProvider
@@ -35,6 +36,11 @@ class AppServiceProvider extends ServiceProvider
         \View::composer(
             'partial.left-sidebar',
             ContractorMenuComposer::class
+        );
+
+        \View::composer(
+            'settings::partial.menu',
+            SettingsMenuComposer::class
         );
     }
 }

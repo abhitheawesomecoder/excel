@@ -16,7 +16,7 @@
             <div class="btn-group user-helper-dropdown">
                 <i class="material-icons" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">keyboard_arrow_down</i>
                 <ul class="dropdown-menu pull-right">
-                    <li><a href=""><i class="material-icons">person</i>Account</a></li>
+                    <li><a href="{{ route('settings.index') }}"><i class="material-icons">person</i>Account</a></li>
                     <li role="seperator" class="divider"></li>
                     <li><a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();"><i class="material-icons">input</i>Sign Out</a></li>
                 </ul>
@@ -46,10 +46,7 @@
     <!-- #Menu -->
     <!-- Footer -->
     <div class="legal">
-        <i title="@lang('core::core.minify_sidebar')" id="minify-sidebar" class="material-icons">keyboard_arrow_left</i>
-        <div class="version">
-            <b>@lang('bap.version'): {{ config('bap.version') }}</b>
-        </div>
+        
     </div>
     <!-- #Footer -->
 </aside>

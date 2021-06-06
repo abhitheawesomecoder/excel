@@ -21,6 +21,8 @@ class AddContractorForm extends Form
 
     	$this->add('position', 'text', ['rules' => 'required']);
         if($this->getData('create_form')){
+        $this->add('login_email', 'email', ['rules' => 'required']);
+
     	$this->add('password', 'password', ['rules' => 'required|confirmed|min:8']);
 
     	$this->add('password_confirmation', 'password', ['rules' => 'required']);
@@ -33,7 +35,7 @@ class AddContractorForm extends Form
 
     	$this->add('company_postcode', 'text', ['rules' => 'required']);
 
-    	$this->add('company_email', 'text', ['rules' => 'required']);
+    	$this->add('company_email', 'email', ['rules' => 'required']);
 
     	$this->add('company_fax_no', 'text', ['rules' => 'required']);
 

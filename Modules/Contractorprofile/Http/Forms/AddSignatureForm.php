@@ -10,6 +10,8 @@ class AddSignatureForm extends Form
     {   
         $this->add('_id', 'hidden', ['default_value' => $this->getData('job_id')]);
 
+        $this->add('name', 'hidden');
+
         $this->add('_signature', 'hidden');
 
     }

@@ -11,11 +11,9 @@ class AddJobForm extends Form
         $this->add('_todo', 'hidden', ['default_value' => '']);
 
         if($this->getData('create_form') == false)
-        $this->add('job_number', 'static');
+        $this->add('job_number', 'static',['label' => 'Excel job number']);
 
         $this->add('client_order_number', 'text');
-
-    	$this->add('excel_job_number', 'text');
 
         $this->add('client_id', 'select', [
                 'choices' => $this->getData('clients'),
@@ -29,7 +27,7 @@ class AddJobForm extends Form
                 'label' => 'Store Name'
             ]);
 
-        $this->add('due_date', 'text', ['attr' => ['class' => 'form-control datepicker']]);
+        $this->add('due_date', 'text', ['label' => 'Committed date','attr' => ['class' => 'form-control datepicker']]);
 
         $this->add('assigned_to', 'select', [
                 'choices' => $this->getData('staff'),

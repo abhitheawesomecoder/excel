@@ -102,7 +102,10 @@ changeColorButton.addEventListener("click", function (event) {
 savePNGButton.addEventListener("click", function (event) {
   if (signaturePad.isEmpty()) {
     alert("Please provide a signature first.");
-  } else {
+  }else if(document.getElementById("sname").value.length == 0){
+    alert("Please enter your name.");
+  }else {
+    document.getElementById("name").value = document.getElementById("sname").value;
     var dataURL = signaturePad.toDataURL();
     //console.log(document.getElementsByName("_id")[0].value);
     //document.getElementsByName("_id")[0].value = 3;

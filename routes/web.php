@@ -18,4 +18,14 @@ Route::get('/', function () {
 
 Auth::routes();
 
+Route::get('/image', 'HomeController@image')->name('image');
+
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::post('/home', 'HomeController@filter')->name('filter');
+
+Route::get('/upcomingjobs', 'HomeController@getUpcomingJobs')->name('dashboard.upcomingjobs');
+
+Route::get('/completedjobs', 'HomeController@getCompletedJobs')->name('dashboard.completedjobs');
+
+Route::get('/upcomingtasks', 'HomeController@getUpcomingTasks')->name('dashboard.upcomingtasks');

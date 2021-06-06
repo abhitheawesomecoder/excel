@@ -2,6 +2,25 @@
 
 return [
 
+    'settings' => ['module' => 'Settings',
+
+                   'menu' => [ 'security' => [ 'label' => 'Security', 'form' => ['title' => 'Change Password', 'subtitle' => 'Set New Password']],
+                               'company' => [ 'label' => 'Company', 'form' => ['title' => 'Company Settings', 'subtitle' => 'Set Company Details']],
+                               'account' => [ 'label' => 'Account', 'form' => ['title' => 'Account Settings', 'subtitle' => 'Set Account Details']]
+                              ]
+
+                  ],
+
+    'dashboard' => ['module' => 'Dashboard',
+                    'widgets' => [  
+                                    'upcomingjobs' => 'UPCOMING JOBS',
+                                    'completedjobs' => 'JOBS COMPLETED',
+                                    'upcomingtasks' => 'UPCOMING TASKS',
+                                    'completedtasks' => 'TASKS COMPLETED',
+                                    'calendar' => 'UPCOMING & COMPLETED JOBS'
+                                ]
+                   ],
+
     'contractor_navigation' => 'NAVIGATION',
 
     'main_navigation' => 'MAIN NAVIGATION',

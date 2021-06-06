@@ -115,6 +115,7 @@ class ContractorprofileController extends Controller
        $sign->contractor_date = Carbon::today()->toDateString();
        $sign->contractor_id = $userId;
        $sign->job_id =$request->_id;
+       $sign->name = $request->name;
        $sign->save();
        
 

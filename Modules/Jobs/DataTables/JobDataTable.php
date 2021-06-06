@@ -11,13 +11,27 @@ use Yajra\DataTables\Html\Editor\Editor;
 use Illuminate\Support\Facades\Auth;
 
 class JobDataTable extends DataTable
-{
+{   
+    protected $sourceRoute;
+
+    protected $tableId;
+
     /**
      * Build DataTable class.
      *
      * @param mixed $query Results from query() method.
      * @return \Yajra\DataTables\DataTableAbstract
      */
+    public function setAjaxSource($route)
+    {
+        $this->sourceRoute = $route;
+    }
+
+    public function setTableId($tableId)
+    {
+        $this->tableId = $tableId;
+    }
+
     public function dataTable($query)
     {   $editUrl = route('jobs.index');
 
@@ -67,10 +81,9 @@ class JobDataTable extends DataTable
         $query = $model->newQuery();
         $newQuery = $query->select([
                 'jobs.id as id',
-                'jobs.job_number as job_number',
+                'jobs.job_number as excel_job_number',
                 'jobs.client_order_number as client_order_number',
-                'jobs.excel_job_number as excel_job_number',
-                'jobs.due_date as due_date',
+                'jobs.due_date as committed_date',
                 'clients.client_name as client_name',
                 'jobs.status as status',
                 'jobtypes.job_type as job_type',
@@ -93,7 +106,7 @@ class JobDataTable extends DataTable
      */
     public function html()
     {
-        return $this->builder()
+        $builder = $this->builder()
                     ->setTableId('job-table')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
@@ -102,6 +115,16 @@ class JobDataTable extends DataTable
                     ->buttons(
                         Button::make('create')
                     );
+
+        if ($this->tableId != '') {
+            $builder = $builder->setTableId($this->tableId);
+        }
+        if ($this->sourceRoute != '') {
+            $builder = $builder->ajax($this->sourceRoute);
+        }
+
+        return $builder;
+
     }
 
     /**
@@ -121,7 +144,7 @@ class JobDataTable extends DataTable
             Column::make('client_order_number'),
             Column::make('client_name'),
             Column::make('job_type'),
-            Column::make('due_date'),
+            Column::make('committed_date'),
             Column::make('priority')
         ];
     }

@@ -74,7 +74,7 @@ class JobsController extends Controller
         if($data->count()) {
                     foreach ($data as $key => $value) {
                     $events[] = Calendar::event(
-                    $value->excel_job_number,
+                    $value->job_number,
                     true,
                     new \DateTime($value->due_date),
                     new \DateTime($value->due_date.' +1 day'),
@@ -87,7 +87,31 @@ class JobsController extends Controller
                 );
             }
         }
-        $calendar = Calendar::addEvents($events);
+        //$calendar = Calendar::addEvents($events);
+
+        $calendar = Calendar::setOptions([
+            'header' => [
+                'left' => 'prev,next today B1 B2',
+                'center' => 'title',
+                'right' => 'month,agendaWeek,agendaDay',
+            ],
+            'customButtons' => [
+                'B1' => [
+                    'text' => 'button1'
+                 ],
+                'B2' => [
+                    'text' => 'button2'
+                 ]
+            ],
+            'defaultView' => 'month',
+            'visibleRange' => [
+                 'start' => '2020-01-24',
+                 'end' => '2021-02-31'
+            ]
+        ]);
+        $calendar->setId("jobCalendar");
+        $calendar->addEvents($events);
+
         return view('jobs::calendar', compact('calendar'));
     }
     public function index(JobDataTable $dataTable)
@@ -114,6 +138,7 @@ class JobsController extends Controller
         $sign->staffcode = $request->_signature; 
         $sign->staff_date = Carbon::today()->toDateString();
         $sign->staff_id = $userId;
+        $sign->name = $request->name;
         $sign->save();
 
         $job->status = 5;
@@ -210,7 +235,7 @@ class JobsController extends Controller
         $newJob = new Job;
         $newJob->job_number = $contractor->next_job_number;
         $newJob->client_order_number = $request->client_order_number;
-        $newJob->excel_job_number = $request->excel_job_number;
+        //$newJob->excel_job_number = $request->excel_job_number;
         $newJob->client_id = $request->client_id;
         $newJob->store_id = $request->store_id;
         $newJob->due_date = $request->due_date;
@@ -401,7 +426,7 @@ class JobsController extends Controller
 
         $newJob = Job::find($id);
         $newJob->client_order_number = $request->client_order_number;
-        $newJob->excel_job_number = $request->excel_job_number;
+        //$newJob->excel_job_number = $request->excel_job_number;
         $newJob->client_id = $request->client_id;
         $newJob->store_id = $request->store_id;
         $newJob->due_date = $request->due_date;
@@ -447,10 +472,6 @@ class JobsController extends Controller
             'client_order_number' => [
                 'type' => 'text'
             ],
-            'excel_job_number' => [
-                'type' => 'text'
-            ],
-
             'client_id' => [
                 'type' => 'select'
             ],

@@ -9,6 +9,7 @@
        	 <img style="height: 10%;" src="{{$sign->contractorcode}}" alt="Logo">
        </td>
     </tr>
+    <tr><td style="text-align: right;">Name : </td><td>{{$sign->name}}</td></tr>
     <tr><td style="text-align: right;">Date : </td><td>{{$sign->contractor_date}}</td></tr>
 </table>
 </page_footer>

@@ -34,6 +34,8 @@
 
         </div>
         <div>
+          <label style="color: black;font-size: 15px;" for="fname">Enter name:</label>
+          <input type="text" id="sname" name="sname">
           <button type="button" class="button save" data-action="save-png">Save</button>
           <button type="button" class="button save" data-action="save-jpg">Save as JPG</button>
           <button type="button" class="button save" data-action="save-svg">Save as SVG</button>

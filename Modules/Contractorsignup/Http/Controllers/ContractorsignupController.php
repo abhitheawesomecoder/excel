@@ -220,6 +220,10 @@ class ContractorsignupController extends Controller
                 'type' => 'text',
             ],
 
+            'login_email' => [
+                'type' => 'email',
+            ],
+
             'password' => [
                 'type' => 'password'
             ],
@@ -252,7 +256,7 @@ class ContractorsignupController extends Controller
             ],
 
             'company_email' => [
-                'type' => 'text',
+                'type' => 'email',
             ],
 
             'company_fax_no' => [
